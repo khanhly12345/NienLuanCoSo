@@ -48,14 +48,14 @@
             <div class="row" style="margin-top: 10px;">
                 <div class="col-4">
                     <div class="card">
-                        <a href=""><img src="../assets/product.webp" alt="" width="100%"></a> 
+                        <a href=""><img src="../assets/product.webp" alt="" width="100%"></a>
                         <h3 class="title" style="font-size: 18px;">Cải muối dưa phơi 1 nắng 2kg</h3>
                         <div class="price">75.000₫</div>
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="card">
-                        <a href=""><img src="../assets/product.webp" alt="" width="100%"></a> 
+                        <a href=""><img src="../assets/product.webp" alt="" width="100%"></a>
                         <h3 class="title" style="font-size: 18px;">Cải muối dưa phơi 1 nắng 2kg</h3>
                         <div class="price">75.000₫</div>
                     </div>
@@ -63,7 +63,7 @@
                 <div class="col-4">
                     <div class="slide_down">
                         <div class="product_slide">
-                            <a href="" style="width: 120px; padding-top: 10px;"><img src="../assets/product.webp" alt="" width="100%"></a> 
+                            <a href="" style="width: 120px; padding-top: 10px;"><img src="../assets/product.webp" alt="" width="100%"></a>
                             <div class="wrap_title_price" style="padding-left: 10px;">
                                 <h5 class="title">Cải muối dưa phơi 1 nắng 2kg</h5>
                                 <div class="price">75.000₫</div>
@@ -71,7 +71,7 @@
                         </div>
                         <hr>
                         <div class="product_slide">
-                            <a href="" style="width: 120px; padding-top: 10px;"><img src="../assets/product.webp" alt="" width="100%"></a> 
+                            <a href="" style="width: 120px; padding-top: 10px;"><img src="../assets/product.webp" alt="" width="100%"></a>
                             <div class="wrap_title_price" style="padding-left: 10px;">
                                 <h5 class="title">Cải muối dưa phơi 1 nắng 2kg</h5>
                                 <div class="price">75.000₫</div>
@@ -79,7 +79,7 @@
                         </div>
                         <hr>
                         <div class="product_slide">
-                            <a href="" style="width: 120px; padding-top: 10px;"><img src="../assets/product.webp" alt="" width="100%"></a> 
+                            <a href="" style="width: 120px; padding-top: 10px;"><img src="../assets/product.webp" alt="" width="100%"></a>
                             <div class="wrap_title_price" style="padding-left: 10px;">
                                 <h5 class="title">Cải muối dưa phơi 1 nắng 2kg</h5>
                                 <div class="price">75.000₫</div>
@@ -87,7 +87,7 @@
                         </div>
                         <hr>
                         <div class="product_slide">
-                            <a href="" style="width: 120px; padding-top: 10px;"><img src="../assets/product.webp" alt="" width="100%"></a> 
+                            <a href="" style="width: 120px; padding-top: 10px;"><img src="../assets/product.webp" alt="" width="100%"></a>
                             <div class="wrap_title_price" style="padding-left: 10px;">
                                 <h5 class="title">Cải muối dưa phơi 1 nắng 2kg</h5>
                                 <div class="price">75.000₫</div>
@@ -108,7 +108,7 @@
                 <div class="row" style="margin-top: 10px;">
                     <div class="col-3">
                         <div class="card" style="width: 18rem;">
-                            <img src="../assets/product2.webp" class="card-img-top" alt="...">
+                            <img src="../assets/product2.webp" class="card-img-top img" alt="...">
                             <div class="card-body">
                                 <span class="title">Cải muối dưa phơi 1 nắng 2kg</span>
                                 <div class="price">75.000₫</div>
@@ -135,7 +135,8 @@
                     </div>
                     <div class="col-3   ">
                         <div class="card" style="width: 18rem;">
-                            <img src="../assets/product2.webp" class="card-img-top" alt="...">
+							<router-link to="/detail"><img src="../assets/product2.webp" class="card-img-top" alt="..."></router-link>
+
                             <div class="card-body">
                                 <h3 class="title">Cải muối dưa phơi 1 nắng 2kg</h3>
                                 <div class="price">75.000₫</div>
@@ -157,11 +158,11 @@ import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 
 export default {
-    name: 'about',
-    components: {
-        Header,
-        Footer
-    }
+	name: 'about',
+	components: {
+		Header,
+		Footer
+	}
 }
 </script>
 <style>
@@ -221,5 +222,9 @@ export default {
     text-align: center;
 }
 
-
+.img:hover {
+	transform: scale(1.05);
+    transition: transform 0.5s ease 0s;
+    cursor: pointer;
+}
 </style>

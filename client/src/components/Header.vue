@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row" style="padding: 5px 0px 0px 0;">
                 <div class="same col-2 logo_header">
-                    <img src="../assets/vgt5.png" alt="" style="width: 50%;">
+                    <router-link to="/about"><img src="../assets/vgt5.png" alt="" style="width: 50%;"></router-link>
                 </div>
                 <div class="same col-4 search_header" style="display: inline;">
                     <div class="search" style="margin-top: 20px;">
@@ -16,7 +16,7 @@
                     <a href="" style="display: flex; color: rgb(130, 134, 158); text-decoration: none; margin-left: 100px;">
                         <div class="sub_user">
                             <i class="fa fa-phone"></i>
-                        </div>  
+                        </div>
                         <div class="user_signin" style="color: green; width: 150px;">HT. khách hàng <br>0911018650</div>
                     </a>
                 </div>
@@ -24,7 +24,7 @@
                     <a href="" style="display: flex; color: rgb(130, 134, 158); text-decoration: none; margin-left: 20px;">
                         <div class="sub_user">
                             <i class="fa fa-user"></i>
-                        </div>  
+                        </div>
                         <div class="user_signin" style="color: green; width: 100px; ">Đăng nhập <br> Đăng ký</div>
                     </a>
                 </div>
@@ -32,7 +32,7 @@
                     <a href="" style="display: flex; color: rgb(130, 134, 158); text-decoration: none;">
                         <div class="sub_user">
                             <i class="fa fa-cart-plus"></i>
-                        </div>  
+                        </div>
                         <div class="user_signin" style="color: green;">Giỏ hàng của bạn<br><span>0 sản phẩm</span></div>
                     </a>
                 </div>
@@ -40,7 +40,7 @@
         </div>
         <!-- <hr style="margin-bottom: 0;"> -->
     </div>
- 
+
 </template>
 
 <script>
@@ -56,10 +56,9 @@
     border: 2px solid #e0e0e0;
     border-radius: 20px;
 }
-
 .search input{
     border: none;
-    font-size: 14px;        
+    font-size: 14px;
     padding: 10px;
     width: 93%;
     border-radius: 20px;
@@ -72,7 +71,6 @@ input:focus {
 img {
     background: transparent;
 }
-
 .sub_user {
     font-size: 25px;
     padding: 5px 12px;
