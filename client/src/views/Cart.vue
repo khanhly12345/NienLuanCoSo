@@ -1,6 +1,12 @@
 <template>
 	<div>
 		<Header />
+		<div class="header_detail" style="display: flex; justify-content: center; background: white;">
+			<div style="width: 85%; padding-top: 7px; padding-bottom: 7px;">
+				<router-link to="/about" style="text-decoration: none; color: green;">Trang chủ /</router-link>
+				<span style="font-weight: 300; font-size: 14px; color: rgb(161, 160, 160);">Cải muối dưa phơi 1 nắng 2kg</span>
+			</div>
+		</div>
 		<div class="container" style="margin-top: 50px">
 			<div class='row'>
 				<div class="wrap_cart col-8">
