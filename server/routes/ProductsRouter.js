@@ -9,5 +9,7 @@ router.get('/show', ProductsController.show)
 router.post('/edit', ProductsController.edit)
 router.post('/update', upload.single('file'), ProductsController.update)
 router.post('/delete', ProductsController.delete)
+router.post('/detail', ProductsController.detail)
+router.post('/showcart', ProductsController.showcart)
 
 module.exports = router;

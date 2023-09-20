@@ -48,22 +48,35 @@
             <div class="row" style="margin-top: 10px;">
                 <div class="col-4">
                     <div class="card">
-                        <a href=""><img src="../assets/product.webp" alt="" width="100%"></a>
-                        <h3 class="title" style="font-size: 18px;">Cải muối dưa phơi 1 nắng 2kg</h3>
-                        <div class="price">75.000₫</div>
+                        <!-- <a href=""><img src="../assets/product.webp" alt="" width="100%"></a> -->
+						<router-link :to="domanDetail + getData[0]._id"><img :src="doman + getData[0].img" alt="" width="100%"></router-link>
+                        <h3 class="title" style="font-size: 18px;">{{ getData[0].name }}</h3>
+                        <div class="price">{{ HandlePrice(getData[0].price) }}</div>
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="card">
-                        <a href=""><img src="../assets/product.webp" alt="" width="100%"></a>
-                        <h3 class="title" style="font-size: 18px;">Cải muối dưa phơi 1 nắng 2kg</h3>
-                        <div class="price">75.000₫</div>
+                        <!-- <a href=""><img src="../assets/product.webp" alt="" width="100%"></a> -->
+						<router-link :to="domanDetail + getData[1]._id"><img :src="doman + getData[1].img" alt="" width="100%"></router-link>
+                        <h3 class="title" style="font-size: 18px;">{{ getData[1].name }}</h3>
+                        <div class="price">{{ HandlePrice(getData[1].price) }}</div>
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="slide_down">
+						<div  v-for="(value, index) in getData" :key="index">
+							<div class="product_slide">
+								<router-link :to="domanDetail + value._id"><img :src="doman + value.img" alt="" width="120px"></router-link>
+								<div class="wrap_title_price" style="padding-left: 10px;">
+									<h5 class="title">{{ value.name }}</h5>
+									<div class="price">{{ HandlePrice(value.price) }}</div>
+								</div>
+							</div>
+							<hr>
+						</div>
+
                         <div class="product_slide">
-                            <a href="" style="width: 120px; padding-top: 10px;"><img src="../assets/product.webp" alt="" width="100%"></a>
+                            <router-link to="/detail"><img src="../assets/product.webp" alt="" width="120px"></router-link>
                             <div class="wrap_title_price" style="padding-left: 10px;">
                                 <h5 class="title">Cải muối dưa phơi 1 nắng 2kg</h5>
                                 <div class="price">75.000₫</div>
@@ -71,7 +84,7 @@
                         </div>
                         <hr>
                         <div class="product_slide">
-                            <a href="" style="width: 120px; padding-top: 10px;"><img src="../assets/product.webp" alt="" width="100%"></a>
+                            <router-link to="/detail"><img src="../assets/product.webp" alt="" width="120px"></router-link>
                             <div class="wrap_title_price" style="padding-left: 10px;">
                                 <h5 class="title">Cải muối dưa phơi 1 nắng 2kg</h5>
                                 <div class="price">75.000₫</div>
@@ -79,15 +92,8 @@
                         </div>
                         <hr>
                         <div class="product_slide">
-                            <a href="" style="width: 120px; padding-top: 10px;"><img src="../assets/product.webp" alt="" width="100%"></a>
-                            <div class="wrap_title_price" style="padding-left: 10px;">
-                                <h5 class="title">Cải muối dưa phơi 1 nắng 2kg</h5>
-                                <div class="price">75.000₫</div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="product_slide">
-                            <a href="" style="width: 120px; padding-top: 10px;"><img src="../assets/product.webp" alt="" width="100%"></a>
+                            <!-- <a href="" style="width: 120px; padding-top: 10px;"><img src="../assets/product.webp" alt="" width="100%"></a> -->
+							<router-link to="/detail"><img src="../assets/product.webp" alt="" width="120px"></router-link>
                             <div class="wrap_title_price" style="padding-left: 10px;">
                                 <h5 class="title">Cải muối dưa phơi 1 nắng 2kg</h5>
                                 <div class="price">75.000₫</div>
@@ -106,18 +112,20 @@
                 </div>
                 <hr style="margin: 0;">
                 <div class="row" style="margin-top: 10px;">
-                    <div class="col-3">
+                    <div class="col-3" v-for="(value, index) in getData" :key="index">
                         <div class="card" style="width: 18rem;">
-                            <img src="../assets/product2.webp" class="card-img-top img" alt="...">
+                            <router-link :to="domanDetail + value._id"><img :src="doman + value.img" width="200px" height="200px" class="card-img-top" alt="..."></router-link>
+
                             <div class="card-body">
-                                <span class="title">Cải muối dưa phơi 1 nắng 2kg</span>
-                                <div class="price">75.000₫</div>
+                                <span class="title">{{ value.name }}</span>
+                                <div class="price">{{ HandlePrice(value.price) }}</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-3   ">
                         <div class="card" style="width: 18rem;">
-                            <img src="../assets/product2.webp" class="card-img-top" alt="...">
+                            <router-link to="/detail"><img src="../assets/product2.webp" class="card-img-top" alt="..."></router-link>
+
                             <div class="card-body">
                                 <h3 class="title">Cải muối dưa phơi 1 nắng 2kg</h3>
                                 <div class="price">75.000₫</div>
@@ -126,7 +134,8 @@
                     </div>
                     <div class="col-3   ">
                         <div class="card" style="width: 18rem;">
-                            <img src="../assets/product2.webp" class="card-img-top" alt="...">
+                            <router-link to="/detail"><img src="../assets/product2.webp" class="card-img-top" alt="..."></router-link>
+
                             <div class="card-body">
                                 <h3 class="title">Cải muối dưa phơi 1 nắng 2kg</h3>
                                 <div class="price">75.000₫</div>
@@ -156,18 +165,46 @@
 <script>
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
+import axios from 'axios';
+// import HandlePrice from '../const/handlePrice'
 
 export default {
 	name: 'about',
+	data() {
+		return {
+			getData: [],
+			doman: 'http://localhost:3003/',
+			domanDetail: '/detail/'
+		}
+	},
 	components: {
 		Header,
 		Footer
+	},
+	methods: {
+		HandlePrice(value) {
+			const VND = new Intl.NumberFormat('vi-VN', {
+				style: 'currency',
+				currency: 'VND',
+			});
+			value = VND.format(value)
+			return value
+		}
+	}
+	,
+	mounted() {
+		axios.get('http://localhost:3003/api/products/show')
+			.then(res => {
+				this.getData = res.data
+				console.log(this.getData)
+			})
 	}
 }
+
 </script>
 <style>
 .new_product {
-    height: 500px;
+    height: 100%;
     width: 100%;
     background: white;
     margin-top: 10px;

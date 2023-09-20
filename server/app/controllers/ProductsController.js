@@ -70,6 +70,22 @@ class ProductsController{
 				res.json({message: true})
 			})
 	}
+
+	async detail (req, res) {
+		const { id } = req.body
+		console.log(id)
+		const product = await Product.findOne({_id: id})
+		console.log(product)
+		if(product) {
+			res.json(product)
+		}
+	}
+
+	async showcart(req, res) {
+		const { storedCartItems } = req.body
+		const product = await Product.find({ _id: { $in: storedCartItems }})
+		res.json(product)
+	}
 }
 
 

@@ -11,13 +11,13 @@
 			<div class="wrap_detail" style="padding: 10px;">
 				<div class="row">
 					<div class="col-8">
-						<img src="../assets/product2.webp" width="90%" alt="">
+						<img :src="doman + getData['img']" width="90%" alt="">
 					</div>
 					<div class="col-4">
-						<h4 style="color: green;">Cải muối dưa phơi 1 nắng 2kg</h4>
+						<h4 style="color: green;">{{ getData['name'] }}</h4>
 						<span style="color: green;">Tình Trạng: </span><span>Còn Hàng</span>
 						<div class="price">
-							<span>75.000₫</span>
+							<span>{{ HandlePrice(getData['price']) }}</span>
 						</div>
 						<hr>
 						<span><span style="color: green;">Mô tả:</span> Làm nguyên liệu tươi sạch và bổ sung chất sơ cho món ăn cho món ăn.</span>
@@ -38,7 +38,7 @@
 							<li style="padding-left: 10px;"><i class="fab fa-instagram" style="color: green; font-size: 20px;"></i></li>
 						</ul>
 						<button class="btn btn-warning"
-						style="margin-top: 10px; background: #ff5722; color: white; font-size: 20px; font-weight: 500; width: 100%;">Thêm
+						style="margin-top: 10px; background: #ff5722; color: white; font-size: 20px; font-weight: 500; width: 100%;" @click="addCart">Thêm
 						vào giỏ hàng</button>
 					</div>
 
@@ -93,13 +93,52 @@
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import Nav from '../components/Nav.vue'
+import axios from 'axios'
 
 export default {
 	name: 'detail',
+	data() {
+		return {
+			id: '',
+			getData: {},
+			arrayId: [],
+			doman: 'http://localhost:3003/',
+		}
+	},
 	components: {
 		Header,
 		Nav,
 		Footer
+	},
+	methods: {
+		HandlePrice(value) {
+			const VND = new Intl.NumberFormat('vi-VN', {
+				style: 'currency',
+				currency: 'VND',
+			});
+			value = VND.format(value)
+			return value
+		},
+		addCart() {
+			const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+			const id = this.$route.params.id;
+			if(!this.arrayId.includes(id)) {
+				this.arrayId = [...storedCartItems, id]
+				const arrayJson = JSON.stringify(this.arrayId)
+				localStorage.setItem("cart", arrayJson)
+			}
+		}
+	},
+	mounted() {
+		const id = this.$route.params.id;
+		this.id = id
+		axios.post('http://localhost:3003/api/products/detail',{ id })
+			.then(res => {
+				this.getData = res.data
+			})
+			.catch(error => {
+				console.log(error)
+			})
 	}
 }
 /* eslint-disable */

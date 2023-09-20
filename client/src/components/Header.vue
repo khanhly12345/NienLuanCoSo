@@ -29,12 +29,12 @@
                     </a>
                 </div>
                 <div class="same col-2 cart_header">
-                    <a href="" style="display: flex; color: rgb(130, 134, 158); text-decoration: none;">
+                    <router-link to="/cart" style="display: flex; color: rgb(130, 134, 158); text-decoration: none;">
                         <div class="sub_user">
                             <i class="fa fa-cart-plus"></i>
                         </div>
                         <div class="user_signin" style="color: green;">Giỏ hàng của bạn<br><span>0 sản phẩm</span></div>
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </div>

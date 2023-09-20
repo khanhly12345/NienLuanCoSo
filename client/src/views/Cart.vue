@@ -25,33 +25,33 @@
 							<span style="color: black">Thành tiền</span>
 						</div>
 					</div>
-					<div class='row' style="padding: 10px 5px; text-align: center">
+					<div class='row' style="padding: 10px 5px; text-align: center" v-for="(value, index) in getData" :key="index">
 						<div class='col-6'>
 							<div class='row'>
 								<div class='col-4'>
-									<img src="../assets/product2.webp" style="width: 100%" />
+									<img :src="doman + value.img" style="width: 100%" />
 								</div>
 								<div class='col-8' style="padding-top: 15px">
-									<span>cart.name</span>
-									<span>cart.attributes</span>
+									<span>{{ value.name }}</span>
+									<!-- <span>{{ value }}</span> -->
 								</div>
 							</div>
 						</div>
 						<div class='col-2' style="padding-top: 15px">
-							<span style="color: black; font-weight: 600 ">75.000đ</span>
+							<span style="color: black; font-weight: 600 ">{{ HandlePrice(value.price) }}</span>
 						</div>
 						<div class='col-2' style="padding-top: 15px">
 							<div
 								style="display: flex; justify-content: space-around; background-color: rgb(211 214 227); height: 40px; border-radius: 5px; width: 100%; margin-top: 10px;">
-								<button style="border: none; background-color: rgb(211 214 227)">-</button>
+								<button style="border: none; background-color: rgb(211 214 227)" @click="decrease(index)">-</button>
 
-								<div class='quantity' style="padding-top: 10px; color: black">0</div>
+								<div class='quantity' style="padding-top: 10px; color: black">{{ getQuantity[index] }}</div>
 
-								<button style="border: none; background-color: rgb(211 214 227)">+</button>
+								<button style="border: none; background-color: rgb(211 214 227)" @click="increase(index)">+</button>
 							</div>
 						</div>
 						<div class='col-2' style="padding-top: 15px">
-							<span style="color: black; font-weight:  600">75.000đ</span>
+							<span style="color: black; font-weight:  600">{{ HandlePrice(value.price * getQuantity[index]) }}</span>
 							<div style="padding-top: 10px">
 								<a href=''>Xóa</a>
 							</div>
@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <div style="display: flex; justify-content: space-between; padding-top: 10px">
-                            <span style="color: black">Thành Tiền</span><span style="color: red; font-weight: 600">HandlePrice(totalPrice)</span>
+                            <span style="color: black">Thành Tiền</span><span style="color: red; font-weight: 600">{{ HandlePrice(total) }}</span>
                         </div>
                         <div class="button_buy" style="margin-top: 10px; cursor: pointer">
                                     <div>Mua Ngay</div>
@@ -120,13 +120,59 @@
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import Nav from '../components/Nav.vue'
+import axios from 'axios'
 
 export default {
 	name: 'detail',
+	data() {
+		return {
+			getData: [],
+			getQuantity: [],
+			total: 0,
+			doman: 'http://localhost:3003/',
+		}
+	},
+	methods: {
+		HandlePrice(value) {
+			const VND = new Intl.NumberFormat('vi-VN', {
+				style: 'currency',
+				currency: 'VND',
+			});
+			value = VND.format(value)
+			return value
+		},
+		increase(index) {
+			const newQuantity = [...this.getQuantity]
+			newQuantity[index] = newQuantity[index] + 1
+			this.getQuantity = newQuantity
+		},
+		decrease(index) {
+			const newQuantity = [...this.getQuantity]
+			if(newQuantity[index] > 1 ) {
+				newQuantity[index] = newQuantity[index] - 1
+				this.getQuantity = newQuantity
+			}
+
+		}
+	},
 	components: {
 		Header,
 		Nav,
 		Footer
+	},
+	mounted() {
+		const storedCartItems = JSON.parse(localStorage.getItem('cart')) || []
+		axios.post('http://localhost:3003/api/products/showcart', { storedCartItems })
+			.then(res => {
+				this.getData = res.data
+				this.getQuantity = new Array(res.data.length).fill(1)
+				this.getData.reduce((index, value) => {
+					this.total += value.price
+				} , 0)
+			})
+			.catch(error => {
+				console.log(error)
+			})
 	}
 }
 /* eslint-disable */
