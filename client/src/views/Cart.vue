@@ -4,7 +4,7 @@
 		<div class="header_detail" style="display: flex; justify-content: center; background: white;">
 			<div style="width: 85%; padding-top: 7px; padding-bottom: 7px;">
 				<router-link to="/about" style="text-decoration: none; color: green;">Trang chủ /</router-link>
-				<span style="font-weight: 300; font-size: 14px; color: rgb(161, 160, 160);">Cải muối dưa phơi 1 nắng 2kg</span>
+				<span style="font-weight: 300; font-size: 14px; color: rgb(161, 160, 160);">Giỏ Hàng</span>
 			</div>
 		</div>
 		<div class="container" style="margin-top: 50px">
@@ -105,7 +105,7 @@
                         <div style="display: flex; justify-content: space-between; padding-top: 10px">
                             <span style="color: black">Thành Tiền</span><span style="color: red; font-weight: 600">{{ HandlePrice(total) }}</span>
                         </div>
-                        <div class="button_buy" style="margin-top: 10px; cursor: pointer">
+                        <div class="button_buy" style="margin-top: 10px; cursor: pointer" @click="handleBuy">
                                     <div>Mua Ngay</div>
                                     <div style="font-size: 12px">Bạn cần đăng nhập để tiếp tục</div>
                         </div>
@@ -121,6 +121,7 @@ import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import Nav from '../components/Nav.vue'
 import axios from 'axios'
+import jwtDecode from 'jwt-decode';
 
 export default {
 	name: 'detail',
@@ -128,7 +129,10 @@ export default {
 		return {
 			getData: [],
 			getQuantity: [],
+			getIdCart: [],
 			total: 0,
+			getToken: {},
+			statusChekcIn: false,
 			doman: 'http://localhost:3003/',
 		}
 	},
@@ -145,14 +149,51 @@ export default {
 			const newQuantity = [...this.getQuantity]
 			newQuantity[index] = newQuantity[index] + 1
 			this.getQuantity = newQuantity
+
+			this.total = this.getData.reduce((init, value, index) => {
+				return init  += (parseInt(value.price) * parseInt(this.getQuantity[index]))
+			}, 0)
+
 		},
 		decrease(index) {
 			const newQuantity = [...this.getQuantity]
 			if(newQuantity[index] > 1 ) {
 				newQuantity[index] = newQuantity[index] - 1
 				this.getQuantity = newQuantity
-			}
 
+				this.total = this.getData.reduce((init, value, index) => {
+					return init  += (parseInt(value.price) * parseInt(this.getQuantity[index]))
+				}, 0)
+			}
+		},
+		handleBuy() {
+			const getIdCart = this.getIdCart
+			const getQuantity = this.getQuantity
+			const getToken = this.getToken
+			const total = this.total
+			if(this.statusChekcIn) {
+				console.log('dat hang than cong')
+				axios.post('http://localhost:3003/api/orders/create', {
+					getIdCart,
+					getQuantity,
+					getToken,
+					total
+				 })
+					.then(res => {
+						if(res.data.message) {
+							console.log(" ban da dat hang thanh cong!")
+							localStorage.removeItem('cart')
+							this.getData = []
+						}else{
+							console.log("cart: dat hang that bai!")
+						}
+					})
+					.catch(error => {
+						console.log(error)
+					})
+			}else{
+
+			}
 		}
 	},
 	components: {
@@ -162,13 +203,20 @@ export default {
 	},
 	mounted() {
 		const storedCartItems = JSON.parse(localStorage.getItem('cart')) || []
+		const Token = localStorage.getItem('tokenLogin') || {}
+		if(Token) {
+			this.getToken = jwtDecode(Token)
+			this.statusChekcIn = true
+		}
+
+		this.getIdCart = storedCartItems
 		axios.post('http://localhost:3003/api/products/showcart', { storedCartItems })
 			.then(res => {
 				this.getData = res.data
 				this.getQuantity = new Array(res.data.length).fill(1)
 				this.getData.reduce((index, value) => {
 					this.total += value.price
-				} , 0)
+				}, 0)
 			})
 			.catch(error => {
 				console.log(error)

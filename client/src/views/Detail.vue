@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<Header />
-		<div class="header_detail" style="display: flex; justify-content: center;">
+		<div class="header_detail" style="display: flex; justify-content: center">
 			<div style="width: 70%; padding-top: 7px;">
 				<router-link to="/about" style="text-decoration: none; color: green;">Trang chủ /</router-link>
-				<span style="font-weight: 300; font-size: 14px; color: rgb(161, 160, 160);">Cải muối dưa phơi 1 nắng 2kg</span>
+				<span style="font-weight: 300; font-size: 14px; color: rgb(161, 160, 160);">Thông Tin Chi Tiết</span>
 			</div>
 		</div>
 		<div class="container" style="display: flex; justify-content: center;">
@@ -122,7 +122,7 @@ export default {
 		addCart() {
 			const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
 			const id = this.$route.params.id;
-			if(!this.arrayId.includes(id)) {
+			if(!storedCartItems.includes(id)) {
 				this.arrayId = [...storedCartItems, id]
 				const arrayJson = JSON.stringify(this.arrayId)
 				localStorage.setItem("cart", arrayJson)

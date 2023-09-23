@@ -166,6 +166,7 @@
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 // import HandlePrice from '../const/handlePrice'
 
 export default {
@@ -174,7 +175,7 @@ export default {
 		return {
 			getData: [],
 			doman: 'http://localhost:3003/',
-			domanDetail: '/detail/'
+			domanDetail: '/detail/',
 		}
 	},
 	components: {

@@ -6,6 +6,8 @@ import Cart from '../views/Cart'
 import ProductAdmin from '../views/ProductAdmin'
 import AddProduct from '../views/AddProduct'
 import EditProduct from '../views/EditProduct'
+import Login from '../views/Login'
+import Register from '../views/Register'
 
 Vue.use(Router)
 
@@ -23,6 +25,14 @@ export default new Router({
 		{
 			path: '/cart',
 			component: Cart
+		},
+		{
+			path: '/login',
+			component: Login
+		},
+		{
+			path: '/register',
+			component: Register
 		},
 		{
 			path: '/admin/product',
