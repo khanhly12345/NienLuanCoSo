@@ -10,7 +10,10 @@ import Login from '../views/Login'
 import Register from '../views/Register'
 import Order from '../views/Order'
 import DetailOrder from '../views/DetailOrder'
-
+import AccountAdmin from '../views/AccountAdmin'
+import AddAdmin from '../views/AddAdmin'
+import EditAdmin from '../views/EditAdmin'
+import LoginAdmin from '../views/LoginAdmin'
 Vue.use(Router)
 
 export default new Router({
@@ -55,6 +58,22 @@ export default new Router({
 		{
 			path: '/admin/detailorder/:id',
 			component: DetailOrder
+		},
+		{
+			path: '/admin/account',
+			component: AccountAdmin
+		},
+		{
+			path: '/admin/addAdmin',
+			component: AddAdmin
+		},
+		{
+			path: '/admin/edit/:id',
+			component: EditAdmin
+		},
+		{
+			path: '/admin/login',
+			component: LoginAdmin
 		}
 	]
 })
