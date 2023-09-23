@@ -18,7 +18,27 @@ class Order {
 		if(order.save()) {
 			res.json({ message: true })
 		}
+	}
 
+	async show(req, res) {
+		const order = await Orders.find().populate('user')
+		res.json(order)
+	}
+
+	async detailOrder(req, res) {
+		const { id } = req.body
+		const detailOrder = await Orders.findOne({ _id: id}).populate('item.product')
+		res.json(detailOrder)
+	}
+
+	async delete(req, res) {
+		const { id } = req.body
+		const product = await Orders.deleteOne({ _id: id})
+		if(product) {
+			res.json({message: true})
+		}else{
+			res.json({message: false})
+		}
 	}
 }
 

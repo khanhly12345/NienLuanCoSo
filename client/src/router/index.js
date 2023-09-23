@@ -8,6 +8,8 @@ import AddProduct from '../views/AddProduct'
 import EditProduct from '../views/EditProduct'
 import Login from '../views/Login'
 import Register from '../views/Register'
+import Order from '../views/Order'
+import DetailOrder from '../views/DetailOrder'
 
 Vue.use(Router)
 
@@ -45,6 +47,14 @@ export default new Router({
 		{
 			path: '/admin/addproduct',
 			component: AddProduct
+		},
+		{
+			path: '/admin/order',
+			component: Order
+		},
+		{
+			path: '/admin/detailorder/:id',
+			component: DetailOrder
 		}
 	]
 })
