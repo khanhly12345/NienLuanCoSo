@@ -9,12 +9,39 @@
                     <img src='../assets/avatar.jpg' style="width: 5%; height: 80%; border-radius: 50%"/>
                     <div style="padding-left: 5px">
                         <span>Chào Admin, </span><br>
-                        <span style="color: red">storeToken.username</span>
+                        <span style="color: red">{{ getAdmin.username }}</span>
                     </div>
                 </div>
             </div>
     </div>
 </template>
+<script>
+import axios from 'axios'
+
+export default {
+	data() {
+		return {
+			getAdmin: {}
+		}
+	},
+	mounted() {
+		const getToken = localStorage.getItem('admin')
+		if(!getToken) {
+			this.$router.push('/admin/login')
+		}
+	},
+	mounted() {
+		const getToken = localStorage.getItem('admin')
+		axios.post('http://localhost:3003/api/admin/getadmin', {getToken})
+			.then(res =>{
+				this.getAdmin = res.data
+			})
+			.catch(error =>{
+				console.log("admin nav", error)
+			})
+	}
+}
+</script>
 <style>
 .heading {
     position: fixed;

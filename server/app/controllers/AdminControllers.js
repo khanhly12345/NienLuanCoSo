@@ -62,6 +62,38 @@ class AdminControllers {
 			res.json({ message: true })
 		}
 	}
+
+	async checklogin(req, res) {
+		const {username, password} = req.body
+		try {
+			const admin = await Admin.findOne({ username})
+			console.log(admin)
+			const passwordMatch = await bcrypt.compare(password, admin.password);
+			const secretKey = 'khanhlydeptrai'
+			if(passwordMatch) {
+				let token = jwt.sign({userId: admin._id, username: admin.username}, secretKey)
+				res.json({message: true, token})
+			}else{
+				res.json({message: false})
+			}
+		} catch (error) {
+			console.log("error check login", error)
+		}
+	}
+
+	async getadmin(req, res) {
+		const { getToken } = req.body
+		try {
+			const decoded = jwt.decode(getToken, 'khanhlydeptrai')
+			const admin = await Admin.findOne({_id: decoded.userId})
+			if(admin) {
+				res.json(admin)
+			}
+		} catch (error) {
+			console.log("get admin", error)
+		}
+
+	}
 }
 
 module.exports = new AdminControllers()

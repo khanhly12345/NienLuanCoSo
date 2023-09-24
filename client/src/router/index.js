@@ -14,6 +14,8 @@ import AccountAdmin from '../views/AccountAdmin'
 import AddAdmin from '../views/AddAdmin'
 import EditAdmin from '../views/EditAdmin'
 import LoginAdmin from '../views/LoginAdmin'
+import Overview from '../views/Overview'
+
 Vue.use(Router)
 
 export default new Router({
@@ -74,6 +76,10 @@ export default new Router({
 		{
 			path: '/admin/login',
 			component: LoginAdmin
+		},
+		{
+			path: '/admin/overview',
+			component: Overview
 		}
 	]
 })

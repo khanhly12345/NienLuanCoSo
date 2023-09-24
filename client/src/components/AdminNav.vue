@@ -10,7 +10,7 @@
 		<div class="navigation">
 			<ul class='ul'>
 				<li class="li">
-					<router-link to='' class='outStading'><i class="fa fa-chart-line"></i><span class="sub">Overview</span> </router-link>
+					<router-link to='overview' class='outStading'><i class="fa fa-chart-line"></i><span class="sub">Overview</span> </router-link>
 				</li>
 				<li class="li">
 					<router-link to='user'  class='outStading'><i class="fa fa-users"></i><span class="sub">Customer</span> </router-link>
@@ -25,12 +25,24 @@
 					<router-link to='account'  class='outStading'><i class="fa fa-user"></i><span class="sub">Account</span></router-link>
 				</li>
 				<li class="li"><router-link to=''  class='outStading'><i class="fa fa-wrench"></i><span class="sub">Setting</span> </router-link></li>
-				<li class="li"><router-link to=''  class='outStading'><i class="fa fa-lock"></i><span class="sub">Login</span> </router-link></li>
+				<li class="li" @click.prevent="handleLogin"><router-link to=''  class='outStading'><i class="fa fa-lock"></i><span class="sub">Login</span> </router-link></li>
 				<li class="li"><router-link to=''  class='outStading'><i class="fa fa-arrow-right"></i><span class="sub">Log out </span></router-link></li>
 			</ul>
 		</div>
 	</div>
 </template>
+<script>
+import axios from 'axios'
+
+export default {
+	methods: {
+		handleLogin() {
+			localStorage.removeItem('admin')
+			this.$router.push('/admin/login')
+		}
+	},
+}
+</script>
 
 <style scoped>
 .nav {
