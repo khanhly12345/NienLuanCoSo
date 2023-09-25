@@ -73,9 +73,7 @@ class ProductsController{
 
 	async detail (req, res) {
 		const { id } = req.body
-		console.log(id)
 		const product = await Product.findOne({_id: id})
-		console.log(product)
 		if(product) {
 			res.json(product)
 		}

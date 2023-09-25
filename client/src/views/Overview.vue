@@ -16,7 +16,7 @@ import axios from 'axios'
 export default {
 	components: {
 		AdminNav,
-		AdminHeader
+		AdminHeader,
 	},
 }
 </script>
