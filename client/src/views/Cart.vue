@@ -122,6 +122,7 @@ import Footer from '../components/Footer.vue'
 import Nav from '../components/Nav.vue'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode';
+import io from 'socket.io-client';
 
 export default {
 	name: 'detail',
@@ -184,6 +185,7 @@ export default {
 							console.log(" ban da dat hang thanh cong!")
 							localStorage.removeItem('cart')
 							this.getData = []
+							this.notifications(getToken)
 						}else{
 							console.log("cart: dat hang that bai!")
 						}
@@ -194,6 +196,10 @@ export default {
 			}else{
 
 			}
+		},
+		notifications(getToken) {
+			const socket = io('http://localhost:3003');
+			socket.emit('purchar', ({userId: getToken.userId, message: 'đã đặt hàng'}));
 		}
 	},
 	components: {
