@@ -15,6 +15,7 @@ import AddAdmin from '../views/AddAdmin'
 import EditAdmin from '../views/EditAdmin'
 import LoginAdmin from '../views/LoginAdmin'
 import Overview from '../views/Overview'
+import SeeMore from '../views/SeeMore'
 
 Vue.use(Router)
 
@@ -80,6 +81,10 @@ export default new Router({
 		{
 			path: '/admin/overview',
 			component: Overview
+		},
+		{
+			path: '/seemore',
+			component: SeeMore
 		}
 	]
 })

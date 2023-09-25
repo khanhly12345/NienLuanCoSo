@@ -4,7 +4,7 @@
 			<div class="notifications" style="padding: 10px 20px 10px 10px; position: relative">
 				<i class="fa fa-bell" style="font-size: 30px"></i>
 				<span
-					style="height: 10px; width: 10px; background-color: rgb(16, 185, 129); color: rgb(16, 185, 129); border-radius: 26px; padding: 5px; display: flex; position: absolute; top: 0; right: 15px"></span>
+					style="border-radius: 26px; padding: 5px; display: flex; position: absolute; top: -5px; right: 4px; color: red;">{{ getNoti.length }}</span>
 				<div class='wrap_noti' style="position: absolute;">
 					<div class="noti2">
 						<div class="sub_noti">

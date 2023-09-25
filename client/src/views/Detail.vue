@@ -128,6 +128,7 @@ export default {
 			return value
 		},
 		addCart() {
+			const count = document.getElementsByClassName('count')[0]
 			const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
 			const id = this.$route.params.id;
 			if (!storedCartItems.includes(id)) {
@@ -135,6 +136,7 @@ export default {
 				const arrayJson = JSON.stringify(this.arrayId)
 				localStorage.setItem("cart", arrayJson)
 			}
+			count.innerHTML = storedCartItems.length + 1
 		},
 		handleSubmit() {
 			const id = this.id
@@ -185,7 +187,6 @@ export default {
 			.catch(error => {
 				console.log('error get detail', error)
 			})
-
 	}
 }
 /* eslint-disable */

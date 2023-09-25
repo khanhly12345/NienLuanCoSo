@@ -53,7 +53,7 @@
 						<div class='col-2' style="padding-top: 15px">
 							<span style="color: black; font-weight:  600">{{ HandlePrice(value.price * getQuantity[index]) }}</span>
 							<div style="padding-top: 10px">
-								<a href=''>Xóa</a>
+								<a href='' @click.prevent="handlDeleteCart(value._id)">Xóa</a>
 							</div>
 						</div>
 					</div>
@@ -200,6 +200,17 @@ export default {
 		notifications(getToken) {
 			const socket = io('http://localhost:3003');
 			socket.emit('purchar', ({userId: getToken.userId, message: 'đã đặt hàng'}));
+		},
+		handlDeleteCart(id) {
+			const newData = this.getData.filter((value) => value._id !== id)
+			this.getData = newData
+
+			let getCart =  JSON.parse(localStorage.getItem('cart')) || []
+			const newCart = getCart.filter((value) => value !== id)
+			localStorage.setItem('cart',  JSON.stringify(newCart))
+
+			const count = document.getElementsByClassName('count')[0]
+			count.innerHTML = this.getIdCart.length - 1
 		}
 	},
 	components: {

@@ -46,7 +46,7 @@
 						<div class="sub_user">
 							<i class="fa fa-cart-plus"></i>
 						</div>
-						<div class="user_signin" style="color: green;">Giỏ hàng của bạn<br><span>0 sản phẩm</span></div>
+						<div class="user_signin" style="color: green;">Giỏ hàng của bạn<br><span class="count">{{ count }}</span> sản phẩm</div>
 					</router-link>
 				</div>
 			</div>
@@ -62,7 +62,8 @@ export default {
 	data() {
 		return {
 			getDecoded: {},
-			status: false
+			status: false,
+			count: 0,
 		}
 	},
 	methods: {
@@ -77,6 +78,11 @@ export default {
 				console.log(this.getDecoded)
 		}
 
+		const countCart = () => {
+			let count = JSON.parse(localStorage.getItem('cart')) || 0
+			this.count = count.length
+		}
+		countCart()
 	}
 }
 </script>
