@@ -8,8 +8,9 @@
 				</div>
 				<div class="same col-4 search_header" style="display: inline;">
 					<div class="search" style="margin-top: 20px;">
-						<input type='text' placeholder="Tìm kiếm" />
-						<a href="#" style="color: green;"><i class="fas fa-search"></i></a>
+						<input type='text' placeholder="Tìm kiếm" v-model="search" />
+						<router-link :to="'/search/' + search" style="color: green;"><i
+								class="fas fa-search"></i></router-link>
 					</div>
 				</div>
 				<div class="same col-2 login_header">
@@ -21,11 +22,16 @@
 					</a>
 				</div>
 				<div class="same col-2 login_header">
-					<div style="display: flex; position: relative" className="wrap_infor" v-if="status">
-						<div style="display: flex; width: 100%">
+					<div style="display: flex; position: relative" v-if="status">
+						<div class="wrap_info" style="display: flex; width: 100%" @click="toggle">
 							<img src='../assets/avatar.jpg' style="width: 50px; border-radius: 50px" />
-							<div style="paddingLeft: 5px; width: 90px">Xin chào, <br><span
-									style="color: red; font-weight: 550, paddingTop: 10px">{{ getDecoded.username }}</span>
+							<div style="padding-left: 5px; width: 90px">Xin chào, <br><span
+									style="color: red; font-weight: 550; padding-top: 10px">{{ getDecoded.username }}</span>
+							</div>
+							<div class="infor" :class="{'none': show}">
+								<div class="sub_infor">
+									<button style="width: 100%" class='btn btn-primary' @click="logOut">Đăng Xuất</button>
+								</div>
 							</div>
 						</div>
 						<!-- <div className={clsx(style.infor)}>
@@ -34,19 +40,21 @@
                                         </div>
                                     </div> -->
 					</div>
-					<router-link to="/login" style="display: flex; color: rgb(130, 134, 158); text-decoration: none; margin-left: 20px;" v-else>
-                        <div class="sub_user">
-                            <i class="fa fa-user"></i>
-                        </div>
-                        <div class="user_signin" style="color: green; width: 100px; ">Đăng nhập <br> Đăng ký</div>
-                    </router-link>
+					<router-link to="/login"
+						style="display: flex; color: rgb(130, 134, 158); text-decoration: none; margin-left: 20px;" v-else>
+						<div class="sub_user">
+							<i class="fa fa-user"></i>
+						</div>
+						<div class="user_signin" style="color: green; width: 100px; ">Đăng nhập <br> Đăng ký</div>
+					</router-link>
 				</div>
 				<div class="same col-2 cart_header">
 					<router-link to="/cart" style="display: flex; color: rgb(130, 134, 158); text-decoration: none;">
 						<div class="sub_user">
 							<i class="fa fa-cart-plus"></i>
 						</div>
-						<div class="user_signin" style="color: green;">Giỏ hàng của bạn<br><span class="count">{{ count }}</span> sản phẩm</div>
+						<div class="user_signin" style="color: green;">Giỏ hàng của bạn<br><span class="count">{{ count
+						}}</span> sản phẩm</div>
 					</router-link>
 				</div>
 			</div>
@@ -64,26 +72,46 @@ export default {
 			getDecoded: {},
 			status: false,
 			count: 0,
-		}
+			search: '',
+			show: false
+		};
 	},
 	methods: {
-
+		toggle() {
+			this.show = !this.show
+		},
+		logOut() {
+			localStorage.removeItem('tokenLogin')
+			window.location.href = '/about'
+		}
 	},
 	mounted() {
 		let getToken = localStorage.getItem('tokenLogin') || {};
-		if(getToken){
-			let decoded = jwtDecode(getToken)
-			this.getDecoded = decoded
-			this.status = true
-				console.log(this.getDecoded)
+		if (getToken) {
+			let decoded = jwtDecode(getToken);
+			this.getDecoded = decoded;
+			this.status = true;
+			console.log(this.getDecoded);
 		}
-
 		const countCart = () => {
-			let count = JSON.parse(localStorage.getItem('cart')) || 0
-			this.count = count.length
-		}
-		countCart()
-	}
+			let count = JSON.parse(localStorage.getItem('cart')) || 0;
+			this.count = count.length;
+		};
+		countCart();
+
+			// let getLogout = document.getElementsByClassName('wrap_info')[0]
+			// console.log(getLogout)
+			// let getInfo = document.getElementsByClassName('infor')[0]
+			// console.log(getInfo)
+			// getLogout.addEventListener('mouseover', (e) => {
+			// 	getInfo.style.display = 'block'
+			// })
+			// getLogout.addEventListener('mouseout', (e) => {
+			// 	getInfo.style.display = 'none'
+			// })
+			const element = this.$refs.myElement;
+			console.log(element)
+	},
 }
 </script>
 
@@ -125,4 +153,27 @@ img {
 .user_signin {
 	text-align: center;
 	padding-left: 10px;
+}
+
+.infor {
+	position: absolute;
+	height: 100px;
+	width: 200px;
+	background: white;
+	z-index: 1;
+	border-radius: 5px;
+	text-align: center;
+	top: 55px;
+	left: -50px;
+	padding: 10px;
+	border: 1px solid rgba(0, 0, 0, .125);
+	display: none;
+}
+
+.none {
+	display: block;
+}
+
+.sub_infor {
+	padding: 10px;
 }</style>

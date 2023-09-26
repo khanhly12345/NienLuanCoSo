@@ -84,6 +84,46 @@ class ProductsController{
 		const product = await Product.find({ _id: { $in: storedCartItems }})
 		res.json(product)
 	}
+
+	async sortbypriceasc(req, res) {
+		const product = await Product.find({}).sort({ price: +1 })
+		if(product) {
+			res.json(product)
+		}
+	}
+
+	async sortbypricedesc(req, res) {
+		const product = await Product.find({}).sort({ price: -1 })
+		if(product) {
+			res.json(product)
+		}
+	}
+
+	async sortbynameasc(req, res) {
+		const product = await Product.find({}).sort({ name: +1 })
+		if(product) {
+			res.json(product)
+		}
+	}
+
+	async sortbynamedesc(req, res) {
+		const product = await Product.find({}).sort({ name: -1 })
+		if(product) {
+			res.json(product)
+		}
+	}
+
+	async search(req, res) {
+		try {
+            const {value} = req.body
+            const product = await Product.find({name: { $regex: new RegExp(value, 'i')}})
+			console.log(product)
+            res.json(product)
+        } catch (error) {
+            console.log('search ', error)
+        }
+
+	}
 }
 
 

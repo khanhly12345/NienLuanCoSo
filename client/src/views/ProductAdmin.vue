@@ -7,8 +7,8 @@
 			<div class='d-flex' style="justify-content: space-between; padding: 10px">
 				<h1>Product</h1>
 				<div style="padding-top: 10px">
-					<form class="form-inline my-2 my-lg-0 d-flex">
-						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+					<form class="form-inline my-2 my-lg-0 d-flex" @submit.prevent="handleSearch">
+						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="search" />
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
 				</div>
@@ -58,7 +58,8 @@ export default {
 		return {
 			domainEdit: 'products/edit/',
 			doman: 'http://localhost:3003/',
-			getDatas: []
+			getDatas: [],
+			search: ''
 		}
 	},
 	components: {
@@ -80,6 +81,14 @@ export default {
 			})
 			.catch(error => {
 				console.log(error)
+			})
+		},
+		handleSearch() {
+			const value = this.search
+			axios.post('http://localhost:3003/api/products/search', { value })
+			.then(res => {
+				this.getDatas = res.data
+				console.log(this.getData)
 			})
 		}
 	},

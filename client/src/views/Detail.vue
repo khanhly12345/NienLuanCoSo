@@ -68,7 +68,7 @@
 							</div>
 							<div style="marginTop: 5px">
 								<span>{{ value.createdAt }}</span>
-								<a style="margin-left: 20px; height: 35px" class='btn btn-danger' @click="handleDeleteCmt(value._id, value.productId)">Xóa</a>
+								<a style="margin-left: 20px; height: 35px" class='btn btn-danger' v-if="value.userId._id === getToken.userId" @click="handleDeleteCmt(value._id, value.productId)">Xóa</a>
 							</div>
 						</div>
 					</div>

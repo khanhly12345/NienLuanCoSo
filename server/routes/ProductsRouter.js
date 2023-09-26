@@ -11,5 +11,10 @@ router.post('/update', upload.single('file'), ProductsController.update)
 router.post('/delete', ProductsController.delete)
 router.post('/detail', ProductsController.detail)
 router.post('/showcart', ProductsController.showcart)
+router.get('/sortbypriceasc', ProductsController.sortbypriceasc)
+router.get('/sortbypricedesc', ProductsController.sortbypricedesc)
+router.get('/sortbynameasc', ProductsController.sortbynameasc)
+router.get('/sortbynamedesc', ProductsController.sortbynamedesc)
+router.post('/search', ProductsController.search)
 
 module.exports = router;

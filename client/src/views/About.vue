@@ -154,7 +154,7 @@
                     </div>
                 </div>
                 <div style="display: flex; justify-content: center">
-                    <a href="" class="btn btn-success"><span>Xem tất cả <i class="fas fa-chevron-right"></i></span></a>
+                    <router-link to="/seemore" class="btn btn-success"><span>Xem tất cả <i class="fas fa-chevron-right"></i></span></router-link>
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@
 				</div>
 				<hr style="margin: 0;">
 				<div class="row" style="margin-top: 10px;">
-					<!-- <div class="col-3" v-for="(value, index) in getData" :key="index">
+					<div class="col-3" v-for="(value, index) in getData" :key="index">
 						<div class="card" style="width: 18rem;">
 							<router-link :to="domanDetail + value._id"><img :src="doman + value.img" width="200px"
 									height="200px" class="card-img-top" alt="..."></router-link>
@@ -33,7 +33,7 @@
 								<div class="price">{{ HandlePrice(value.price) }}</div>
 							</div>
 						</div>
-					</div> -->
+					</div>
 					<div class="col-3   ">
 						<div class="card" style="width: 18rem;">
 							<router-link to="/detail"><img src="../assets/product2.webp" class="card-img-top"
@@ -93,7 +93,9 @@ import axios from 'axios';
 export default {
 	data() {
 		return {
-			sortBy: null
+			sortBy: null,
+			getData: [],
+			doman: 'http://localhost:3003/'
 		}
 	},
 	components: {
@@ -105,19 +107,50 @@ export default {
 			this.sortBy = 'nameAZ';
 			console.log(this.sortBy)
 			// Thực hiện các thao tác sắp xếp tên A -> Z ở đây
+			axios.get('http://localhost:3003/api/products/sortbynameasc')
+				.then(res => {
+					this.getData = res.data
+				})
 		},
 		sortByNameZA() {
-		this.sortBy = 'nameZA';
-		// Thực hiện các thao tác sắp xếp tên Z -> A ở đây
+			this.sortBy = 'nameZA';
+			// Thực hiện các thao tác sắp xếp tên Z -> A ở đây
+			axios.get('http://localhost:3003/api/products/sortbynamedesc')
+				.then(res => {
+					this.getData = res.data
+				})
 		},
 		sortByPriceAsc() {
-		this.sortBy = 'priceAsc';
-		// Thực hiện các thao tác sắp xếp giá tăng dần ở đây
+			this.sortBy = 'priceAsc';
+			// Thực hiện các thao tác sắp xếp giá tăng dần ở đây
+			axios.get('http://localhost:3003/api/products/sortbypriceasc')
+				.then(res => {
+					this.getData = res.data
+				})
 		},
 		sortByPriceDesc() {
-		this.sortBy = 'priceDesc';
-		// Thực hiện các thao tác sắp xếp giá giảm dần ở đây
+			this.sortBy = 'priceDesc';
+			// Thực hiện các thao tác sắp xếp giá giảm dần ở đây
+			axios.get('http://localhost:3003/api/products/sortbypricedesc')
+				.then(res => {
+					this.getData = res.data
+				})
+		},
+		HandlePrice(value) {
+			const VND = new Intl.NumberFormat('vi-VN', {
+				style: 'currency',
+				currency: 'VND',
+			});
+			value = VND.format(value)
+			return value
 		}
+	},
+	mounted() {
+		axios.get('http://localhost:3003/api/products/show')
+			.then(res => {
+				this.getData = res.data
+				console.log(this.getData)
+			})
 	}
 }
 </script>

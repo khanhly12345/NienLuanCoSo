@@ -16,6 +16,7 @@ import EditAdmin from '../views/EditAdmin'
 import LoginAdmin from '../views/LoginAdmin'
 import Overview from '../views/Overview'
 import SeeMore from '../views/SeeMore'
+import Search from '../views/Search'
 
 Vue.use(Router)
 
@@ -85,6 +86,10 @@ export default new Router({
 		{
 			path: '/seemore',
 			component: SeeMore
+		},
+		{
+			path: '/search/:value',
+			component: Search
 		}
 	]
 })
